@@ -1,7 +1,6 @@
 import "@/styles/globals.css"
 import { Metadata } from "next"
 import { siteConfig } from "@/config"
-import { GoogleAnalytics } from "@next/third-parties/google"
 import { GeistSans } from "geist/font/sans"
 import HolyLoader from "holy-loader"
 
@@ -55,7 +54,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <TailwindIndicator />
           <ScrollTop />
         </ThemeProvider>
-        <GoogleAnalytics gaId={process.env.GA_ID!} />
+        {/* <GoogleAnalytics gaId={process.env.GA_ID!} /> */}
         <Toaster />
       </body>
     </html>
