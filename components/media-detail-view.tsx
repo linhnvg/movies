@@ -32,7 +32,7 @@ const Hero: React.FC<ComponentProps<"div">> = ({
       className={cn("container md:mt-8 md:px-16 xl:mt-12 xl:px-32", className)}
       {...props}
     >
-      <div className="grid gap-4 md:grid-cols-[auto,1fr] md:gap-10 xl:gap-16">
+      <div className="grid gap-4 md:grid-cols-[auto_1fr] md:gap-10 xl:gap-16">
         {children}
       </div>
     </div>

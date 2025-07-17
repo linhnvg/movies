@@ -14,7 +14,7 @@ export const UserReviewCard: React.FC<UserReviewCardProps> = ({ review }) => {
   const { name, avatar_path, username, rating } = author_details
 
   return (
-    <div className="grid grid-cols-[auto,1fr] items-center gap-2 md:items-start md:gap-x-4">
+    <div className="grid grid-cols-[auto_1fr] items-center gap-2 md:items-start md:gap-x-4">
       <div className="w-10 md:row-span-2 md:w-12">
         <div className="relative aspect-square">
           <UserAvatar image={avatar_path} alt={name} className="border" />
@@ -45,7 +45,7 @@ export const UserReviewCard: React.FC<UserReviewCardProps> = ({ review }) => {
 }
 
 export const SkeletonReviewCard = () => (
-  <div className="grid grid-cols-[auto,1fr] items-center gap-2 md:items-start md:gap-x-4">
+  <div className="grid grid-cols-[auto_1fr] items-center gap-2 md:items-start md:gap-x-4">
     <div className="relative aspect-square w-10 md:row-span-2 md:w-12">
       <Skeleton className="size-full rounded-full" />
     </div>

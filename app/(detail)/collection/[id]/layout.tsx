@@ -9,15 +9,13 @@ import { MediaPoster } from "@/components/media-poster"
 import { ScrollFixer } from "@/components/scroll-fixer"
 
 interface DetailLayoutProps {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
   children: React.ReactNode
 }
 
 export async function generateMetadata({ params }: DetailLayoutProps) {
   const { name } = await tmdb.collection.details({
-    id: params.id,
+    id: (await params).id,
   })
 
   return {
@@ -34,7 +32,7 @@ export default async function DetailLayout({
 }: DetailLayoutProps) {
   const { id, name, overview, backdrop_path, poster_path } =
     await tmdb.collection.details({
-      id: params.id,
+      id: (await params).id,
     })
 
   if (!id) return notFound()

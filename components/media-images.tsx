@@ -57,7 +57,9 @@ export const MediaImages: React.FC<MediaImagesProps> = ({
             </div>
           </DialogTrigger>
 
-          <DialogContent className={cn(aspect_ratio > 1 && "max-w-screen-xl")}>
+          <DialogContent
+            className={cn(aspect_ratio > 1 && "max-w-(--breakpoint-xl)")}
+          >
             <div
               className={cn(
                 aspect_ratio > 1 ? "aspect-video" : "aspect-poster"
@@ -72,7 +74,7 @@ export const MediaImages: React.FC<MediaImagesProps> = ({
               />
             </div>
 
-            <div className="absolute bottom-0 left-0 flex h-32 w-full items-end justify-end space-x-2 bg-gradient-to-t from-background to-transparent pb-4 pr-4">
+            <div className="absolute bottom-0 left-0 flex h-32 w-full items-end justify-end space-x-2 bg-linear-to-t from-background to-transparent pb-4 pr-4">
               <Button
                 size="sm"
                 variant="ghost"

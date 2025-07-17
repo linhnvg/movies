@@ -14,15 +14,13 @@ import { MediaTrailerDialog } from "@/components/media-trailer-dialog"
 import { ScrollFixer } from "@/components/scroll-fixer"
 
 interface DetailLayoutProps {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
   children: React.ReactNode
 }
 
 export async function generateMetadata({ params }: DetailLayoutProps) {
   const { name } = await tmdb.tv.detail({
-    id: params.id,
+    id: (await params).id,
   })
 
   return {
@@ -50,7 +48,7 @@ export default async function DetailLayout({
     tagline,
     videos,
   } = await tmdb.tv.detail<WithVideos>({
-    id: params.id,
+    id: (await params).id,
     append: "videos",
   })
 

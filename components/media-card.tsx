@@ -12,7 +12,10 @@ const Content: React.FC<ComponentProps<"div">> = ({
   ...props
 }) => {
   return (
-    <div className={cn("overlay", className)} {...props}>
+    <div
+      className={cn("overlay hover:bg-white/50 hover:bg-none", className)}
+      {...props}
+    >
       <div className="p-2 md:p-6">{children}</div>
     </div>
   )

@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 
@@ -11,12 +13,12 @@ export default function NotFound() {
           <br />
           Please go back to the homepage.
         </p>
-        <a
+        <Link
           href="/"
           className={cn(buttonVariants({ variant: "default" }), "mt-6")}
         >
           Go Home
-        </a>
+        </Link>
       </div>
     </div>
   )

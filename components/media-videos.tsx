@@ -26,7 +26,7 @@ export const MediaVideos: React.FC<MediaVideosProps> = async ({ videos }) => {
             <MediaVideosCard name={name} ytKey={key} />
           </DialogTrigger>
 
-          <DialogContent className="max-w-screen-lg">
+          <DialogContent className="max-w-(--breakpoint-lg)">
             <DialogHeader>
               <DialogTitle>{name}</DialogTitle>
             </DialogHeader>

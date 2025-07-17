@@ -132,7 +132,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
             image={lastEpisode.still_path}
             alt={lastEpisode.name}
           />
-          <div className="overlay">
+          <div className="overlay hover:bg-white/50 hover:bg-none">
             <div className="p-4 md:p-10">
               <Badge className="mb-4 gap-1">
                 <span>S{pad(lastEpisode.season_number)}</span>

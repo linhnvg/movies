@@ -81,5 +81,59 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    function ({ addUtilities, addComponents }) {
+      // Add custom utilities
+      addUtilities({
+        ".grid-list": {
+          display: "grid",
+          gap: "1rem",
+          "grid-template-columns": "repeat(auto-fill, minmax(8rem, 1fr))",
+          "@media (min-width: 768px)": {
+            "grid-template-columns": "repeat(auto-fill, minmax(12rem, 1fr))",
+          },
+          "@media (min-width: 1024px)": {
+            "grid-template-columns": "repeat(auto-fill, minmax(15rem, 1fr))",
+          },
+        },
+        ".h-hero": {
+          height: "560px",
+          "@media (min-width: 768px)": {
+            height: "780px",
+          },
+        },
+        ".scrollbar-hidden": {
+          "scrollbar-width": "none",
+          "-ms-overflow-style": "none",
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+        },
+      })
+
+      // Add custom components
+      addComponents({
+        ".overlay": {
+          position: "absolute",
+          inset: "0",
+          border: "1px solid hsl(var(--border))",
+          "border-radius": "calc(var(--radius) - 2px)",
+          display: "flex",
+          "align-items": "flex-end",
+          "background-image":
+            "linear-gradient(to top right, hsl(var(--background) / 0.95))",
+        },
+        ".empty-box": {
+          display: "flex",
+          height: "8rem",
+          "align-items": "center",
+          "justify-content": "center",
+          "border-radius": "calc(var(--radius) + 2px)",
+          border: "1px dashed hsl(var(--border))",
+          color: "hsl(var(--muted-foreground))",
+        },
+      })
+    },
+  ],
 }

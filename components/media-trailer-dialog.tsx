@@ -22,7 +22,7 @@ export const MediaTrailerDialog: React.FC<MediaTrailerDialogProps> = ({
       </DialogTrigger>
 
       {trailer && (
-        <DialogContent className="max-w-screen-lg">
+        <DialogContent className="max-w-(--breakpoint-lg)">
           <iframe
             className="aspect-square size-full rounded-md sm:aspect-video"
             src={yt.video(trailer.key, true)}

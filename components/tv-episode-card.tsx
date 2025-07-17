@@ -33,7 +33,7 @@ export const TvEpisodeCard: React.FC<Episode> = ({
           </div>
         </DialogTrigger>
 
-        <DialogContent className="max-w-screen-xl">
+        <DialogContent className="max-w-(--breakpoint-xl)">
           <div className="aspect-video">
             <Image
               src={tmdbImage.url(still_path, "original")}

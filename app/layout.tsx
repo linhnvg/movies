@@ -1,4 +1,5 @@
 import "@/styles/globals.css"
+
 import { Metadata } from "next"
 import { siteConfig } from "@/config"
 import { GeistSans } from "geist/font/sans"

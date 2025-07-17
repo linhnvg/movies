@@ -35,7 +35,7 @@ export const MovieCollectionDialog: React.FC<MovieCollectionDialogProps> = ({
       </DialogTrigger>
       <DialogContent
         onOpenAutoFocus={(e) => e.preventDefault()}
-        className="max-w-screen-lg"
+        className="max-w-(--breakpoint-lg)"
       >
         <DialogHeader>
           <DialogTitle>{name}</DialogTitle>
