@@ -1,15 +1,13 @@
 import { MediaWatchProviders } from "@/components/media-watch-providers"
 
 interface DetailWatchProps {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
 }
 
 export const metadata = {
   title: "Watch",
 }
 
-export default function DetailWatch({ params }: DetailWatchProps) {
-  return <MediaWatchProviders id={params.id} type="tv" />
+export default async function DetailWatch({ params }: DetailWatchProps) {
+  return <MediaWatchProviders id={(await params).id} type="tv" />
 }

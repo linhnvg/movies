@@ -4,12 +4,8 @@ import { ListPagination } from "@/components/list-pagination"
 import { UserReviewCard } from "@/components/user-review-card"
 
 interface DetailReviewsProps {
-  params: {
-    id: string
-  }
-  searchParams: {
-    page: string
-  }
+  params: Promise<{ id: string }>
+  searchParams: Promise<{ page: string }>
 }
 
 export const metadata = {
@@ -21,8 +17,8 @@ export default async function DetailReviews({
   searchParams,
 }: DetailReviewsProps) {
   const { results, page, total_pages } = await tmdb.movie.reviews({
-    id: params.id,
-    page: searchParams.page,
+    id: (await params).id,
+    page: (await searchParams).page,
   })
 
   if (!results.length) return <div className="empty-box">No reviews</div>

@@ -3,7 +3,7 @@ import { pages } from "@/config"
 import { PersonList } from "@/components/person-list"
 
 interface ListPageProps {
-  searchParams?: Record<string, string>
+  searchParams?: Promise<Record<string, string>>
 }
 
 export async function generateMetadata() {
@@ -13,11 +13,11 @@ export async function generateMetadata() {
   }
 }
 
-export default function Popular({ searchParams }: ListPageProps) {
+export default async function Popular({ searchParams }: ListPageProps) {
   return (
     <PersonList
       list="popular"
-      page={searchParams?.page ?? "1"}
+      page={(await searchParams)?.page ?? "1"}
       title={pages.people.popular.title}
       description={pages.people.popular.description}
     />

@@ -4,12 +4,8 @@ import { ListPagination } from "@/components/list-pagination"
 import { MovieCard } from "@/components/movie-card"
 
 interface DetailRecommendationsProps {
-  params: {
-    id: string
-  }
-  searchParams: {
-    page: string
-  }
+  params: Promise<{ id: string }>
+  searchParams: Promise<{ page: string }>
 }
 
 export const metadata = {
@@ -25,8 +21,8 @@ export default async function DetailRecommendations({
     total_pages: totalPages,
     page: currentPage,
   } = await tmdb.movie.recommendations({
-    id: params.id,
-    page: searchParams.page,
+    id: (await params).id,
+    page: (await searchParams).page,
   })
 
   if (!movies?.length) {

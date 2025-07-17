@@ -7,14 +7,12 @@ import { MediaMiniDetail } from "@/components/media-mini-detail"
 import { MediaPoster } from "@/components/media-poster"
 
 interface DetailProps {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
 }
 
 export default async function Detail({ params }: DetailProps) {
   const { parts } = await tmdb.collection.details({
-    id: params.id,
+    id: (await params).id,
   })
 
   return (

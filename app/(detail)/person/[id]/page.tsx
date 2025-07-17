@@ -20,14 +20,12 @@ import { PersonCreditsTable } from "@/components/person-credits-table"
 import { TvCard } from "@/components/tv-card"
 
 interface DetailProps {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
 }
 
 export async function generateMetadata({ params }: DetailProps) {
   const { name } = await tmdb.person.detail({
-    id: params.id,
+    id: (await params).id,
   })
 
   return {
@@ -48,7 +46,7 @@ export default async function Detail({ params }: DetailProps) {
     known_for_department: department,
     combined_credits: { cast, crew },
   } = await tmdb.person.detail<WithCombinedCredits & WithImages>({
-    id: params.id,
+    id: (await params).id,
     append: "combined_credits,images",
   })
 

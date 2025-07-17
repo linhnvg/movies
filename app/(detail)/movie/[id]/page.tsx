@@ -13,9 +13,7 @@ import {
 import { MovieCollection } from "@/components/movie-collection"
 
 interface DetailProps {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
 }
 
 export default async function Detail({ params }: DetailProps) {
@@ -32,7 +30,7 @@ export default async function Detail({ params }: DetailProps) {
     original_language,
     production_countries,
   } = await tmdb.movie.detail({
-    id: params.id,
+    id: (await params).id,
   })
 
   const overview = [

@@ -14,7 +14,11 @@ import {
 } from "@/components/ui/table"
 import { MediaBackdrop } from "@/components/media-backdrop"
 
-export default async function Detail({ params }: { params: { id: string } }) {
+interface DetailProps {
+  params: Promise<{ id: string }>
+}
+
+export default async function Detail({ params }: DetailProps) {
   const {
     first_air_date,
     last_air_date,
@@ -31,7 +35,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
     original_language,
     last_episode_to_air: lastEpisode,
   } = await tmdb.tv.detail({
-    id: params.id,
+    id: (await params).id,
   })
 
   const items = [
@@ -132,7 +136,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
             image={lastEpisode.still_path}
             alt={lastEpisode.name}
           />
-          <div className="overlay hover:bg-white/50 hover:bg-none">
+          <div className="overlay hover:bg-white/50">
             <div className="p-4 md:p-10">
               <Badge className="mb-4 gap-1">
                 <span>S{pad(lastEpisode.season_number)}</span>
@@ -146,7 +150,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
                 {lastEpisode.overview}
               </p>
               <Link
-                href={`/tv/${params.id}/seasons/${lastEpisode.season_number}`}
+                href={`/tv/${(await params).id}/seasons/${lastEpisode.season_number}`}
                 className={cn(buttonVariants({ variant: "default" }), "mt-4")}
                 prefetch={false}
               >

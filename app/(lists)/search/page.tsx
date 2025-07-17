@@ -5,26 +5,26 @@ import { ListPagination } from "@/components/list-pagination"
 import { SearchResultCard } from "@/components/search-result-card"
 
 interface SearchProps {
-  searchParams: {
+  searchParams: Promise<{
     q: string
     page: string
-  }
+  }>
 }
 
 export async function generateMetadata({ searchParams }: SearchProps) {
   return {
-    title: `Search results for: ${searchParams.q}`,
+    title: `Search results for: ${(await searchParams).q}`,
   }
 }
 
 export default async function Search({ searchParams }: SearchProps) {
-  if (!searchParams.q) {
+  if (!(await searchParams).q) {
     return redirect("/")
   }
 
   const { results, page, total_pages } = await tmdb.search.multi({
-    query: searchParams.q,
-    page: searchParams.page,
+    query: (await searchParams).q,
+    page: (await searchParams).page,
   })
 
   if (!results.length)
@@ -33,7 +33,7 @@ export default async function Search({ searchParams }: SearchProps) {
         <div className="text-center">
           <h1 className="text-2xl">No results found</h1>
           <p className="text-muted-foreground">
-            No results found for &quot;{searchParams.q}&quot;.
+            No results found for &quot;{(await searchParams).q}&quot;.
             <br />
             Please try a different search term.
           </p>
@@ -47,7 +47,7 @@ export default async function Search({ searchParams }: SearchProps) {
         <div className="md:mb-12 md:mt-6">
           <h1 className="mb-2 text-2xl font-medium">Search results for</h1>
           <p className="text-xl text-muted-foreground">
-            &quot;{searchParams.q}&quot;
+            &quot;{(await searchParams).q}&quot;
           </p>
         </div>
 

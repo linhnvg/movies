@@ -19,7 +19,7 @@ export const MediaWatchProviders: React.FC<MediaWatchProvidersProps> = async ({
 }) => {
   const { results } = await tmdb[type].providers({ id, season })
 
-  const region = (cookies().get("region")?.value ?? "US") as keyof WatchLocale
+  const region = (await cookies()).get("region")?.value ?? "US"
   const country = getCountryName(region)
 
   return (
@@ -43,10 +43,16 @@ export const MediaWatchProviders: React.FC<MediaWatchProvidersProps> = async ({
         <div className="grid gap-4 lg:grid-cols-3">
           <ProviderTable
             title="Stream"
-            providers={results?.[region]?.flatrate}
+            providers={results?.[region as keyof WatchLocale]?.flatrate}
           />
-          <ProviderTable title="Buy" providers={results?.[region]?.buy} />
-          <ProviderTable title="Rent" providers={results?.[region]?.rent} />
+          <ProviderTable
+            title="Buy"
+            providers={results?.[region as keyof WatchLocale]?.buy}
+          />
+          <ProviderTable
+            title="Rent"
+            providers={results?.[region as keyof WatchLocale]?.rent}
+          />
         </div>
       </div>
     </div>

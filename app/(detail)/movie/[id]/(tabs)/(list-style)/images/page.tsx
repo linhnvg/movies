@@ -3,9 +3,7 @@ import { tmdb } from "@/tmdb/api"
 import { MediaImages } from "@/components/media-images"
 
 interface DetailImagesProps {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
 }
 
 export const metadata = {
@@ -14,7 +12,7 @@ export const metadata = {
 
 export default async function DetailImages({ params }: DetailImagesProps) {
   const { posters, backdrops } = await tmdb.movie.images({
-    id: params.id,
+    id: (await params).id,
     langs: "en",
   })
 

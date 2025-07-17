@@ -49,7 +49,7 @@ export const MovieHero: React.FC<MovieHeroProps> = ({
         className="hidden md:block"
       />
 
-      <div className="overlay hover:bg-white/50 hover:bg-none">
+      <div className="overlay">
         <div className="mx-auto max-w-3xl space-y-4 p-4 pb-8 text-center md:p-14">
           <Badge className="select-none">{label}</Badge>
 

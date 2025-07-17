@@ -8,21 +8,15 @@ import { MediaCastCard } from "@/components/media-cast-card"
 import { MediaCrewCard } from "@/components/media-crew-card"
 
 interface DetailCreditsProps {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
 }
 
 export const metadata = {
   title: "Credits",
 }
 
-export default async function DetailCredits({
-  params,
-}: {
-  params: { id: string }
-}) {
-  const { cast, crew } = await tmdb.tv.credits({ id: params.id })
+export default async function DetailCredits({ params }: DetailCreditsProps) {
+  const { cast, crew } = await tmdb.tv.credits({ id: (await params).id })
 
   return (
     <section className="space-y-12">

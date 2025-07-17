@@ -10,7 +10,7 @@ import { ListPagination } from "@/components/list-pagination"
 import { MovieCard } from "@/components/movie-card"
 
 interface ListPageProps {
-  searchParams?: Record<string, string>
+  searchParams?: Promise<Record<string, string>>
 }
 
 export async function generateMetadata() {
@@ -21,7 +21,7 @@ export async function generateMetadata() {
 }
 
 export default async function Discover({ searchParams }: ListPageProps) {
-  const region = cookies().get("region")?.value ?? "US"
+  const region = (await cookies()).get("region")?.value ?? "US"
 
   const {
     results: movies,
@@ -29,9 +29,9 @@ export default async function Discover({ searchParams }: ListPageProps) {
     total_pages: totalPages,
   } = await tmdb.discover.movie({
     watch_region: region,
-    page: searchParams?.page,
-    sort_by: searchParams?.sort_by as SortByType,
-    ...filterDiscoverParams(searchParams),
+    page: (await searchParams)?.page,
+    sort_by: (await searchParams)?.sort_by as SortByType,
+    ...filterDiscoverParams(await searchParams),
   })
 
   const { results: providers } = await tmdb.watchProviders.movie({

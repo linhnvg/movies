@@ -20,20 +20,17 @@ import { TvSeasonDetails } from "@/components/tv-season-details"
 import { TvSeasonNavigation } from "@/components/tv-season-navigation"
 
 interface DetailSeasonsProps {
-  params: {
-    id: string
-    season: number
-  }
+  params: Promise<{ id: string; season: number }>
 }
 
 export async function generateMetadata({ params }: DetailSeasonsProps) {
   const detail = await tmdb.tv.detail({
-    id: params.id,
+    id: (await params).id,
   })
 
   const { name } = await tmdb.tvSeasons.details({
-    id: params.id,
-    season: params.season,
+    id: (await params).id,
+    season: (await params).season,
   })
 
   return {
@@ -41,21 +38,19 @@ export async function generateMetadata({ params }: DetailSeasonsProps) {
   }
 }
 
-export default async function DetailSeasons({
-  params: { id, season },
-}: DetailSeasonsProps) {
+export default async function DetailSeasons({ params }: DetailSeasonsProps) {
   const detail = await tmdb.tv.detail({
-    id: id,
+    id: (await params).id,
   })
 
   const { name, overview, poster_path, vote_average, air_date } =
     await tmdb.tvSeasons.details<WithCredits>({
-      id,
-      season,
+      id: (await params).id,
+      season: (await params).season,
       append: "credits",
     })
 
-  if (!id) return notFound()
+  if (!(await params).id) return notFound()
 
   return (
     <MediaDetailView.Root>
@@ -69,13 +64,13 @@ export default async function DetailSeasons({
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href={`/tv/${id}`}>{detail.name}</Link>
+                  <Link href={`/tv/${(await params).id}`}>{detail.name}</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href={`/tv/${id}/seasons`}>Seasons</Link>
+                  <Link href={`/tv/${(await params).id}/seasons`}>Seasons</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
@@ -98,8 +93,15 @@ export default async function DetailSeasons({
         </div>
       </MediaDetailView.Hero>
       <MediaDetailView.Content className="space-y-4">
-        <TvSeasonDetails id={id} season={season} />
-        <TvSeasonNavigation id={id} season={season} seasons={detail.seasons} />
+        <TvSeasonDetails
+          id={(await params).id}
+          season={(await params).season}
+        />
+        <TvSeasonNavigation
+          id={(await params).id}
+          season={(await params).season}
+          seasons={detail.seasons}
+        />
       </MediaDetailView.Content>
     </MediaDetailView.Root>
   )

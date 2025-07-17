@@ -18,7 +18,7 @@ export const MovieCollection: React.FC<MovieCollectionProps> = async ({
   return (
     <div className="h-hero relative w-full">
       <MediaBackdrop image={collection.backdrop_path} alt={collection.name} />
-      <div className="overlay hover:bg-white/50 hover:bg-none">
+      <div className="overlay">
         <div className="p-4 md:p-10">
           <p className="line-clamp-3 text-xs text-muted-foreground md:text-lg">
             Part of

@@ -3,7 +3,7 @@ import { pages } from "@/config"
 import { TrendList } from "@/components/trend-list"
 
 interface TrendingPageProps {
-  searchParams?: Record<string, string>
+  searchParams?: Promise<Record<string, string>>
 }
 
 export async function generateMetadata() {
@@ -22,7 +22,7 @@ export default async function TrendingPage({
       time="day"
       title="Trending TV Shows"
       description={pages.trending.tv.description}
-      page={searchParams?.page ?? "1"}
+      page={(await searchParams)?.page ?? "1"}
     />
   )
 }

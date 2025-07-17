@@ -7,12 +7,8 @@ import { MediaPoster } from "@/components/media-poster"
 import { MediaRating } from "@/components/media-rating"
 
 interface DetailSeasonsProps {
-  params: {
-    id: string
-  }
-  searchParams: {
-    s: string
-  }
+  params: Promise<{ id: string }>
+  searchParams: Promise<{ s: string }>
 }
 
 export const metadata = {
@@ -23,8 +19,9 @@ export const metadata = {
 }
 
 export default async function DetailSeasons({ params }: DetailSeasonsProps) {
+  const id = (await params).id
   const { seasons } = await tmdb.tv.detail({
-    id: params.id,
+    id,
   })
 
   if (!seasons) return <div className="empty-box">No seasons</div>
@@ -34,7 +31,7 @@ export default async function DetailSeasons({ params }: DetailSeasonsProps) {
       {seasons.map((season) => (
         <Fragment key={season.id}>
           <Link
-            href={`/tv/${params.id}/seasons/${season.season_number}`}
+            href={`/tv/${id}/seasons/${season.season_number}`}
             prefetch={false}
           >
             <MediaCard.Root>
