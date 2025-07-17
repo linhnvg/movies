@@ -33,7 +33,6 @@ export const MovieCollectionDialog: React.FC<MovieCollectionDialogProps> = ({
       <DialogTrigger className={buttonVariants()}>
         View The Collection
       </DialogTrigger>
-
       <DialogContent
         onOpenAutoFocus={(e) => e.preventDefault()}
         className="max-w-screen-lg"
@@ -48,7 +47,7 @@ export const MovieCollectionDialog: React.FC<MovieCollectionDialogProps> = ({
         <ScrollArea className="max-h-[80dvh] md:pr-4">
           <div className="grid gap-4 md:grid-cols-2">
             {sortByReleaseDate(parts).map((part) => (
-              <Link href={`/movie/${part.id}`} key={part.id}>
+              <Link href={`/movie/${part.id}`} key={part.id} legacyBehavior>
                 <MediaMiniDetail.Root className="rounded-md border">
                   <MediaMiniDetail.Backdrop>
                     <MediaBackdrop
@@ -80,5 +79,5 @@ export const MovieCollectionDialog: React.FC<MovieCollectionDialogProps> = ({
         </ScrollArea>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

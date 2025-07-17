@@ -54,7 +54,7 @@ const PaginationLink = ({
     )}
     prefetch={false}
     {...props}
-  />
+    legacyBehavior />
 )
 PaginationLink.displayName = "PaginationLink"
 

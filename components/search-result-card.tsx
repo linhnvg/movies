@@ -24,7 +24,7 @@ export const SearchResultCard: React.FC<SearchResultCardProps> = ({
   const isMovie = media_type === "movie"
 
   return (
-    <Link href={`/${media_type}/${id}`} prefetch={false}>
+    <Link href={`/${media_type}/${id}`} prefetch={false} legacyBehavior>
       <MediaCard.Root>
         <MediaPoster
           image={isPerson ? media.profile_path : media.poster_path}
@@ -56,5 +56,5 @@ export const SearchResultCard: React.FC<SearchResultCardProps> = ({
         </MediaCard.Content>
       </MediaCard.Root>
     </Link>
-  )
+  );
 }

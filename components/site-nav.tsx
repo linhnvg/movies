@@ -20,11 +20,10 @@ import { Icons } from "@/components/icons"
 const SiteNav = () => {
   return (
     <div className="flex items-center">
-      <Link href="/">
+      <Link href="/" legacyBehavior>
         <Icons.Logo className="size-6" />
         <span className="sr-only">Movies Logo</span>
       </Link>
-
       <NavigationMenu className="ml-4 hidden lg:flex">
         <NavigationMenuList>
           {navigation.items.map((item) =>
@@ -37,7 +36,7 @@ const SiteNav = () => {
         </NavigationMenuList>
       </NavigationMenu>
     </div>
-  )
+  );
 }
 
 const SiteNavItem = ({ title, icon, items, href, description }: NavItem) => {
@@ -93,7 +92,7 @@ const SiteNavListItem = ({ title, icon, description, href }: NavItem) => {
       <Link
         href={href}
         className="select-none space-y-2 rounded-md p-3 hover:bg-accent"
-      >
+        legacyBehavior>
         <div className="text-sm font-medium leading-none">
           <Icon className="mr-1 inline size-3" /> {title}
           {title === "Discover" && (
@@ -107,7 +106,7 @@ const SiteNavListItem = ({ title, icon, description, href }: NavItem) => {
         </p>
       </Link>
     </NavigationMenuLink>
-  )
+  );
 }
 
 export { SiteNav }

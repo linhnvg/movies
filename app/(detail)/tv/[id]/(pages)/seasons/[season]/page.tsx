@@ -69,7 +69,7 @@ export default async function DetailSeasons({
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href={`/tv/${id}`}>{detail.name}</Link>
+                  <Link href={`/tv/${id}`} legacyBehavior>{detail.name}</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
@@ -97,11 +97,10 @@ export default async function DetailSeasons({
           />
         </div>
       </MediaDetailView.Hero>
-
       <MediaDetailView.Content className="space-y-4">
         <TvSeasonDetails id={id} season={season} />
         <TvSeasonNavigation id={id} season={season} seasons={detail.seasons} />
       </MediaDetailView.Content>
     </MediaDetailView.Root>
-  )
+  );
 }

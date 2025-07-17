@@ -59,11 +59,9 @@ export default async function DetailLayout({
   return (
     <MediaDetailView.Root>
       <ScrollFixer />
-
       <MediaDetailView.Backdrop>
         <MediaBackdrop image={backdrop_path} alt={title} priority />
       </MediaDetailView.Backdrop>
-
       <MediaDetailView.Hero>
         <MediaDetailView.Poster>
           <MediaPoster image={poster_path} alt={title} size="w780" priority />
@@ -77,7 +75,7 @@ export default async function DetailLayout({
               <Link
                 key={genre.id}
                 href={`/movie/discover?with_genres=${genre.id}`}
-              >
+                legacyBehavior>
                 <MediaDetailView.Genre key={genre.id}>
                   {genre.name}
                 </MediaDetailView.Genre>
@@ -100,7 +98,6 @@ export default async function DetailLayout({
           <MediaTrailerDialog videos={videos?.results} />
         </div>
       </MediaDetailView.Hero>
-
       <MediaDetailView.Content>
         <Tabs className="mt-12 w-full">
           <div className="max-w-screen scrollbar-hidden -mx-8 overflow-x-scroll px-8 lg:m-0 lg:p-0">
@@ -122,5 +119,5 @@ export default async function DetailLayout({
         <div className="mt-4">{children}</div>
       </MediaDetailView.Content>
     </MediaDetailView.Root>
-  )
+  );
 }

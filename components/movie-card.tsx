@@ -17,7 +17,7 @@ export const MovieCard: React.FC<Movie> = ({
   release_date,
 }) => {
   return (
-    <Link href={`/movie/${id}`} key={id} prefetch={false}>
+    <Link href={`/movie/${id}`} key={id} prefetch={false} legacyBehavior>
       <MediaCard.Root>
         <MediaPoster image={poster_path} alt={title} />
         <MediaCard.Content>
@@ -33,5 +33,5 @@ export const MovieCard: React.FC<Movie> = ({
         </MediaCard.Content>
       </MediaCard.Root>
     </Link>
-  )
+  );
 }

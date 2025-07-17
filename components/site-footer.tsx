@@ -23,7 +23,7 @@ export const SiteFooter: React.FC<ComponentProps<"footer">> = () => {
                 <li className="mb-4 text-muted-foreground">{item.title}</li>
                 {item.items?.map((subitem) => (
                   <li className="mb-2 text-sm" key={subitem.href}>
-                    <Link href={subitem.href} prefetch={false}>
+                    <Link href={subitem.href} prefetch={false} legacyBehavior>
                       {subitem.title}
                     </Link>
                   </li>
@@ -111,5 +111,5 @@ export const SiteFooter: React.FC<ComponentProps<"footer">> = () => {
         </div>
       </div>
     </footer>
-  )
+  );
 }

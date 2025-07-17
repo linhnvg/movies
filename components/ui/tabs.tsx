@@ -73,9 +73,9 @@ const TabsLink = React.forwardRef<
         scroll={scroll}
         replace
         {...props}
-      />
+        legacyBehavior />
     </TabsTrigger>
-  )
+  );
 })
 TabsLink.displayName = "TabsLink" // Set the display name for the component
 

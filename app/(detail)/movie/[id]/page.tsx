@@ -79,7 +79,7 @@ export default async function Detail({ params }: DetailProps) {
           key={id}
           href={`/movie/discover?with_companies=${id}`}
           className="mr-1 border-b-2 transition hover:text-foreground"
-        >
+          legacyBehavior>
           {name}
         </Link>
       )),

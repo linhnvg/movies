@@ -36,7 +36,7 @@ export default async function DetailSeasons({ params }: DetailSeasonsProps) {
           <Link
             href={`/tv/${params.id}/seasons/${season.season_number}`}
             prefetch={false}
-          >
+            legacyBehavior>
             <MediaCard.Root>
               <MediaPoster image={season.poster_path} alt={season.name} />
               <MediaCard.Content>
@@ -51,5 +51,5 @@ export default async function DetailSeasons({ params }: DetailSeasonsProps) {
         </Fragment>
       ))}
     </section>
-  )
+  );
 }

@@ -21,7 +21,7 @@ export default async function Detail({ params }: DetailProps) {
     <section className="space-y-4">
       <div className="grid gap-4 md:grid-cols-2">
         {sortByReleaseDate(parts).map((part) => (
-          <Link href={`/movie/${part.id}`} key={part.id}>
+          <Link href={`/movie/${part.id}`} key={part.id} legacyBehavior>
             <MediaMiniDetail.Root>
               <MediaMiniDetail.Backdrop>
                 <MediaBackdrop
@@ -51,5 +51,5 @@ export default async function Detail({ params }: DetailProps) {
         ))}
       </div>
     </section>
-  )
+  );
 }

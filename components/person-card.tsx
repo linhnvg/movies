@@ -12,7 +12,12 @@ export const PersonCard: React.FC<Person> = ({
   known_for_department,
 }) => {
   return (
-    <Link href={`/person/${id}`} key={id} className="w-full" prefetch={false}>
+    <Link
+      href={`/person/${id}`}
+      key={id}
+      className="w-full"
+      prefetch={false}
+      legacyBehavior>
       <MediaCard.Root>
         <MediaPoster image={profile_path} alt={name} />
         <MediaCard.Content>
@@ -24,5 +29,5 @@ export const PersonCard: React.FC<Person> = ({
         </MediaCard.Content>
       </MediaCard.Root>
     </Link>
-  )
+  );
 }
