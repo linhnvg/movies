@@ -145,7 +145,7 @@ const CreditsTableMovieItem = React.forwardRef<
     </TableCell>
     <TableCell>{release_date ? format.year(release_date) : "-"}</TableCell>
     <TableCell>
-      <Link className="font-medium" href={`/movie/${id}`} legacyBehavior>
+      <Link className="font-medium" href={`/movie/${id}`}>
         {title}
       </Link>
       {(character || job) && (
@@ -166,7 +166,7 @@ const CreditsTableTvItem = React.forwardRef<
     </TableCell>
     <TableCell>{first_air_date ? format.year(first_air_date) : "-"}</TableCell>
     <TableCell>
-      <Link className="font-medium" href={`/tv/${id}`} legacyBehavior>
+      <Link className="font-medium" href={`/tv/${id}`}>
         {name}
       </Link>
       <p className="text-muted-foreground">

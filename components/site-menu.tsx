@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { NavItem, navigation, siteConfig } from "@/config"
+import { navigation, NavItem, siteConfig } from "@/config"
 import { useDialog } from "@/hooks"
 import { Bug, MenuIcon } from "lucide-react"
 
@@ -59,7 +59,7 @@ export const SiteMenu = () => {
               className={cn(buttonVariants({ variant: "outline" }), "flex-1")}
               target="_blank"
               rel="noreferrer"
-              legacyBehavior>
+            >
               <Icons.Github className="mr-2 size-4 fill-current" />
               <span>Source code</span>
             </Link>
@@ -77,7 +77,7 @@ export const SiteMenu = () => {
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
-  );
+  )
 }
 
 const MenuItem = ({ title, href, icon: Icon }: NavItem) => {
@@ -88,13 +88,13 @@ const MenuItem = ({ title, href, icon: Icon }: NavItem) => {
         buttonVariants({ variant: "ghost" }),
         "w-full justify-between hover:no-underline"
       )}
-      legacyBehavior>
+    >
       <div className={cn("flex items-center justify-start")}>
         <Icon className="mr-2 size-4" />
         {title}
       </div>
     </Link>
-  );
+  )
 }
 
 const MultipleMenuItem = ({ title, items, icon: Icon }: NavItem) => {

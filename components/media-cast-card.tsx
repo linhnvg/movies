@@ -10,7 +10,7 @@ export const MediaCastCard: React.FC<Cast> = ({
   profile_path,
   character,
 }) => (
-  <Link href={`/person/${id}`} prefetch={false} legacyBehavior>
+  <Link href={`/person/${id}`} prefetch={false}>
     <MediaCard.Root>
       <MediaPoster image={profile_path} alt={name} />
       <MediaCard.Content>

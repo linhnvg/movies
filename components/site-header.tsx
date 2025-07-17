@@ -7,8 +7,8 @@ import { SiteMenu } from "@/components/site-menu"
 import { SiteNav } from "@/components/site-nav"
 import { SiteSettings } from "@/components/site-settings"
 
-export const SiteHeader = () => {
-  const region = cookies().get("region")?.value ?? "US"
+export const SiteHeader = async () => {
+  const region = (await cookies()).get("region")?.value ?? "US"
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">

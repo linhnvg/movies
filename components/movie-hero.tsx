@@ -67,12 +67,12 @@ export const MovieHero: React.FC<MovieHeroProps> = ({
                 size: "lg",
                 variant: "default",
               })}
-              legacyBehavior>
+            >
               Details <ArrowRight className="ml-2 size-4" />
             </Link>
           </div>
         </div>
       </div>
     </div>
-  ));
+  ))
 }

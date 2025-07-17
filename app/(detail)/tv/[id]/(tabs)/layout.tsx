@@ -74,7 +74,7 @@ export default async function DetailLayout({
               <Link
                 key={genre.id}
                 href={`/tv/discover?with_genres=${genre.id}`}
-                legacyBehavior>
+              >
                 <MediaDetailView.Genre>{genre.name}</MediaDetailView.Genre>
               </Link>
             ))}
@@ -118,5 +118,5 @@ export default async function DetailLayout({
         <div className="mt-4">{children}</div>
       </MediaDetailView.Content>
     </MediaDetailView.Root>
-  );
+  )
 }

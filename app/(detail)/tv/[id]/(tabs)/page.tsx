@@ -42,7 +42,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
           key={id}
           href={`/person/${id}`}
           className="mr-1 border-b-2 transition hover:text-foreground"
-          legacyBehavior>
+        >
           {name}
         </Link>
       )),
@@ -94,7 +94,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
           key={id}
           href={`/tv/discover?with_companies=${id}`}
           className="mr-1 border-b-2 transition hover:text-foreground"
-          legacyBehavior>
+        >
           {name}
         </Link>
       )),
@@ -106,7 +106,7 @@ export default async function Detail({ params }: { params: { id: string } }) {
           key={id}
           href={`/tv/discover?with_networks=${id}`}
           className="mr-1 border-b-2 transition hover:text-foreground"
-          legacyBehavior>
+        >
           {name}
         </Link>
       )),

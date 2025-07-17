@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { NavItem, navigation } from "@/config"
+import { navigation, NavItem } from "@/config"
 import { useActiveNav } from "@/hooks"
 
 import { cn } from "@/lib/utils"
@@ -20,7 +20,7 @@ import { Icons } from "@/components/icons"
 const SiteNav = () => {
   return (
     <div className="flex items-center">
-      <Link href="/" legacyBehavior>
+      <Link href="/">
         <Icons.Logo className="size-6" />
         <span className="sr-only">Movies Logo</span>
       </Link>
@@ -36,7 +36,7 @@ const SiteNav = () => {
         </NavigationMenuList>
       </NavigationMenu>
     </div>
-  );
+  )
 }
 
 const SiteNavItem = ({ title, icon, items, href, description }: NavItem) => {
@@ -69,16 +69,16 @@ const SiteNavItemSingle = ({ title, icon, href }: NavItem) => {
 
   return (
     <NavigationMenuItem>
-      <Link href={href} legacyBehavior passHref>
-        <NavigationMenuLink
-          className={cn(
-            navigationMenuTriggerStyle(),
-            isActive && "bg-accent",
-            "gap-2"
-          )}
-        >
-          <Icon className="size-4" /> {title}
-        </NavigationMenuLink>
+      <Link
+        href={href}
+        passHref
+        className={cn(
+          navigationMenuTriggerStyle(),
+          isActive && "bg-accent",
+          "gap-2"
+        )}
+      >
+        <Icon className="size-4" /> {title}
       </Link>
     </NavigationMenuItem>
   )
@@ -92,7 +92,7 @@ const SiteNavListItem = ({ title, icon, description, href }: NavItem) => {
       <Link
         href={href}
         className="select-none space-y-2 rounded-md p-3 hover:bg-accent"
-        legacyBehavior>
+      >
         <div className="text-sm font-medium leading-none">
           <Icon className="mr-1 inline size-3" /> {title}
           {title === "Discover" && (
@@ -106,7 +106,7 @@ const SiteNavListItem = ({ title, icon, description, href }: NavItem) => {
         </p>
       </Link>
     </NavigationMenuLink>
-  );
+  )
 }
 
 export { SiteNav }
