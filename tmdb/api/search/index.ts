@@ -19,17 +19,26 @@ const multi = async ({
   query,
   adult = false,
   page = "1",
-}: SearchRequestParams) =>
-  api.fetcher<
+}: SearchRequestParams) => {
+  const params_ = {
+    query,
+    page,
+    include_adult: String(adult),
+  }
+  return api.fetcher<
     ListResponse<MovieWithMediaType | TvShowWithMediaType | PersonWithMediaType>
-  >({
-    endpoint: "/search/multi",
-    params: {
-      query,
-      page,
-      include_adult: String(adult),
+  >(
+    {
+      endpoint: "/search/multi",
+      params: params_,
     },
-  })
+    {
+      next: {
+        tags: [`search/multi`, JSON.stringify(params_)],
+      },
+    }
+  )
+}
 
 export const search = {
   multi,

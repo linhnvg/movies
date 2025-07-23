@@ -18,32 +18,68 @@ const details = <T>({
   season,
   append,
   langs,
-}: TvSeasonsDetailsRequestParams) =>
-  api.fetcher<SeasonDetails & T>({
-    endpoint: `tv/${id}/season/${season}`,
-    params: {
-      append_to_response: append,
-      include_image_language: langs,
+}: TvSeasonsDetailsRequestParams) => {
+  const params_ = {
+    append_to_response: append,
+    include_image_language: langs,
+  }
+
+  return api.fetcher<SeasonDetails & T>(
+    {
+      endpoint: `tv/${id}/season/${season}`,
+      params: params_,
     },
-  })
+    {
+      next: {
+        tags: [`tv/${id}/season/${season}`, JSON.stringify(params_)],
+      },
+    }
+  )
+}
 
-const credits = ({ id, season }: TvSeasonsDetailsRequestParams) =>
-  api.fetcher<Credits>({
-    endpoint: `tv/${id}/season/${season}/credits`,
-  })
-
-const aggregateCredits = ({ id, season }: TvSeasonsDetailsRequestParams) =>
-  api.fetcher<Credits>({
-    endpoint: `tv/${id}/season/${season}/aggregate_credits`,
-  })
-
-const images = ({ id, season, langs }: TvSeasonsImagesRequestParams) =>
-  api.fetcher<{ posters: Image[]; backdrops: Image[] }>({
-    endpoint: `tv/${id}/season/${season}/images`,
-    params: {
-      include_image_language: langs,
+const credits = ({ id, season }: TvSeasonsDetailsRequestParams) => {
+  return api.fetcher<Credits>(
+    {
+      endpoint: `tv/${id}/season/${season}/credits`,
     },
-  })
+    {
+      next: {
+        tags: [`tv/${id}/season/${season}/credits`],
+      },
+    }
+  )
+}
+
+const aggregateCredits = ({ id, season }: TvSeasonsDetailsRequestParams) => {
+  return api.fetcher<Credits>(
+    {
+      endpoint: `tv/${id}/season/${season}/aggregate_credits`,
+    },
+    {
+      next: {
+        tags: [`tv/${id}/season/${season}/aggregate_credits`],
+      },
+    }
+  )
+}
+
+const images = ({ id, season, langs }: TvSeasonsImagesRequestParams) => {
+  const params_ = {
+    include_image_language: langs,
+  }
+
+  return api.fetcher<{ posters: Image[]; backdrops: Image[] }>(
+    {
+      endpoint: `tv/${id}/season/${season}/images`,
+      params: params_,
+    },
+    {
+      next: {
+        tags: [`tv/${id}/season/${season}/images`, JSON.stringify(params_)],
+      },
+    }
+  )
+}
 
 export const tvSeasons = {
   details,

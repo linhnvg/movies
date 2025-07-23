@@ -8,10 +8,18 @@ import { GetAvailableRegionsResponse, WatchProvider } from "@/tmdb/models"
  * @returns {Promise<GetAvailableRegionsResponse>} A promise that resolves to a list of reviews for the movie.
  * @see https://developer.themoviedb.org/reference/watch-providers-available-regions
  */
-const regions = () =>
-  api.fetcher<GetAvailableRegionsResponse>({
-    endpoint: `watch/providers/regions`,
-  })
+const regions = () => {
+  return api.fetcher<GetAvailableRegionsResponse>(
+    {
+      endpoint: `watch/providers/regions`,
+    },
+    {
+      next: {
+        tags: [`watch/providers/regions`],
+      },
+    }
+  )
+}
 
 /**
  * Fetches the list of Movie watch providers based on the specified region.
@@ -19,13 +27,23 @@ const regions = () =>
  * @param {WatchProvidersRequestParams} params - The request parameters.
  * @returns {Promise<ListResponse<WatchProvider>>} - The list of Movie watch providers.
  */
-const movie = ({ region }: WatchProvidersRequestParams) =>
-  api.fetcher<ListResponse<WatchProvider>>({
-    endpoint: `watch/providers/movie`,
-    params: {
-      watch_region: region,
+const movie = ({ region }: WatchProvidersRequestParams) => {
+  const params_ = {
+    watch_region: region,
+  }
+
+  return api.fetcher<ListResponse<WatchProvider>>(
+    {
+      endpoint: `watch/providers/movie`,
+      params: params_,
     },
-  })
+    {
+      next: {
+        tags: [`watch/providers/movie`, JSON.stringify(params_)],
+      },
+    }
+  )
+}
 
 /**
  * Fetches the list of TV watch providers based on the specified region.
@@ -33,13 +51,25 @@ const movie = ({ region }: WatchProvidersRequestParams) =>
  * @param {WatchProvidersRequestParams} params - The request parameters.
  * @returns {Promise<ListResponse<WatchProvider>>} - The list of TV watch providers.
  */
-const tv = ({ region }: WatchProvidersRequestParams) =>
-  api.fetcher<ListResponse<WatchProvider>>({
-    endpoint: `watch/providers/tv`,
-    params: {
-      watch_region: region,
+const tv = ({ region }: WatchProvidersRequestParams) => {
+  const params_ = {
+    watch_region: region,
+  }
+
+  return api.fetcher<ListResponse<WatchProvider>>(
+    {
+      endpoint: `watch/providers/tv`,
+      params: {
+        watch_region: region,
+      },
     },
-  })
+    {
+      next: {
+        tags: [`watch/providers/tv`, JSON.stringify(params_)],
+      },
+    }
+  )
+}
 
 export const watchProviders = {
   regions,

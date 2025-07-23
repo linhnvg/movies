@@ -121,8 +121,8 @@ module.exports = {
           "border-radius": "calc(var(--radius) - 2px)",
           display: "flex",
           "align-items": "flex-end",
-          "background-image":
-            "linear-gradient(to top right, hsl(var(--background) / 0.95))",
+          // "background-image":
+          //   "linear-gradient(to top right, hsl(var(--background) / 0.95))",
         },
         ".empty-box": {
           display: "flex",

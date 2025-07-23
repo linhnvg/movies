@@ -32,15 +32,25 @@ import {
  * @see https://developer.themoviedb.org/reference/tv-series-popular
  * @see https://developer.themoviedb.org/reference/tv-series-top-rated
  */
-const list = ({ list, page = "1", region, timezone }: TvListRequestParams) =>
-  api.fetcher<ListResponse<TvShow>>({
-    endpoint: `tv/${list}`,
-    params: {
-      page,
-      region,
-      timezone,
+const list = ({ list, page = "1", region, timezone }: TvListRequestParams) => {
+  const params_ = {
+    page,
+    region,
+    timezone,
+  }
+
+  return api.fetcher<ListResponse<TvShow>>(
+    {
+      endpoint: `tv/${list}`,
+      params: params_,
     },
-  })
+    {
+      next: {
+        tags: [`tv/${list}`, JSON.stringify(params_)],
+      },
+    }
+  )
+}
 
 /**
  * Fetches detailed information about a specific TV series.
@@ -49,13 +59,23 @@ const list = ({ list, page = "1", region, timezone }: TvListRequestParams) =>
  * @returns {Promise<TvShowDetails>} A promise that resolves to the detailed information about the TV series.
  * @see https://developer.themoviedb.org/reference/tv-series-details
  */
-const detail = <T>({ id, append }: TvDetailsRequestParams) =>
-  api.fetcher<TvShowDetails & T>({
-    endpoint: `tv/${id}`,
-    params: {
-      append_to_response: append,
+const detail = <T>({ id, append }: TvDetailsRequestParams) => {
+  const params_ = {
+    append_to_response: append,
+  }
+
+  return api.fetcher<TvShowDetails & T>(
+    {
+      endpoint: `tv/${id}`,
+      params: params_,
     },
-  })
+    {
+      next: {
+        tags: [`tv/${id}`, JSON.stringify(params_)],
+      },
+    }
+  )
+}
 
 /**
  * Fetches the credits (cast and crew) for a specific TV series.
@@ -64,10 +84,18 @@ const detail = <T>({ id, append }: TvDetailsRequestParams) =>
  * @returns {Promise<Credits>} A promise that resolves to the credits for the TV series.
  * @see https://developer.themoviedb.org/reference/tv-series-credits
  */
-const credits = ({ id }: TvCreditsRequestParams) =>
-  api.fetcher<Credits>({
-    endpoint: `tv/${id}/credits`,
-  })
+const credits = ({ id }: TvCreditsRequestParams) => {
+  return api.fetcher<Credits>(
+    {
+      endpoint: `tv/${id}/credits`,
+    },
+    {
+      next: {
+        tags: [`tv/${id}/credits`],
+      },
+    }
+  )
+}
 
 /**
  * Fetches the aggregate credits (cast and crew) that have been added to a TV show.
@@ -76,10 +104,18 @@ const credits = ({ id }: TvCreditsRequestParams) =>
  * @returns {Promise<Credits>} A promise that resolves to the credits for the TV series.
  * @see https://developer.themoviedb.org/reference/tv-series-credits
  */
-const aggregateCredits = ({ id }: TvCreditsRequestParams) =>
-  api.fetcher<Credits>({
-    endpoint: `tv/${id}/aggregate_credits`,
-  })
+const aggregateCredits = ({ id }: TvCreditsRequestParams) => {
+  return api.fetcher<Credits>(
+    {
+      endpoint: `tv/${id}/aggregate_credits`,
+    },
+    {
+      next: {
+        tags: [`tv/${id}/aggregate_credits`],
+      },
+    }
+  )
+}
 
 /**
  * Fetches recommendations for a specific TV series.
@@ -88,13 +124,23 @@ const aggregateCredits = ({ id }: TvCreditsRequestParams) =>
  * @returns {Promise<ListResponse<TvShow>>} A promise that resolves to a list of recommended TV shows.
  * @see https://developer.themoviedb.org/reference/tv-series-recommendations
  */
-const recommendations = ({ id, page }: TvRecommendationsRequestParams) =>
-  api.fetcher<ListResponse<TvShow>>({
-    endpoint: `tv/${id}/recommendations`,
-    params: {
-      page,
+const recommendations = ({ id, page }: TvRecommendationsRequestParams) => {
+  const params_ = {
+    page,
+  }
+
+  return api.fetcher<ListResponse<TvShow>>(
+    {
+      endpoint: `tv/${id}/recommendations`,
+      params: params_,
     },
-  })
+    {
+      next: {
+        tags: [`tv/${id}/recommendations`, JSON.stringify(params_)],
+      },
+    }
+  )
+}
 
 /**
  * Fetches TV shows similar to a specific TV series.
@@ -103,13 +149,23 @@ const recommendations = ({ id, page }: TvRecommendationsRequestParams) =>
  * @returns {Promise<ListResponse<TvShow>>} A promise that resolves to a list of similar TV shows.
  * @see https://developer.themoviedb.org/reference/tv-series-similar
  */
-const similar = ({ id, page }: TvSimilarRequestParams) =>
-  api.fetcher<ListResponse<TvShow>>({
-    endpoint: `tv/${id}/similar`,
-    params: {
-      page,
+const similar = ({ id, page }: TvSimilarRequestParams) => {
+  const params_ = {
+    page,
+  }
+
+  return api.fetcher<ListResponse<TvShow>>(
+    {
+      endpoint: `tv/${id}/similar`,
+      params: params_,
     },
-  })
+    {
+      next: {
+        tags: [`tv/${id}/similar`, JSON.stringify(params_)],
+      },
+    }
+  )
+}
 
 /**
  * Fetches images for a specific TV series.
@@ -118,13 +174,23 @@ const similar = ({ id, page }: TvSimilarRequestParams) =>
  * @returns {Promise<GetImagesResponse>} A promise that resolves to the images of the TV series.
  * @see https://developer.themoviedb.org/reference/tv-series-images
  */
-const images = ({ id, langs }: TvImagesRequestParams) =>
-  api.fetcher<GetImagesResponse>({
-    endpoint: `tv/${id}/images`,
-    params: {
-      include_image_language: langs,
+const images = ({ id, langs }: TvImagesRequestParams) => {
+  const params_ = {
+    include_image_language: langs,
+  }
+
+  return api.fetcher<GetImagesResponse>(
+    {
+      endpoint: `tv/${id}/images`,
+      params: params_,
     },
-  })
+    {
+      next: {
+        tags: [`tv/${id}/images`, JSON.stringify(params_)],
+      },
+    }
+  )
+}
 
 /**
  * Fetches videos related to a specific TV series.
@@ -133,10 +199,18 @@ const images = ({ id, langs }: TvImagesRequestParams) =>
  * @returns {Promise<GetVideosResponse>} A promise that resolves to the videos of the TV series.
  * @see https://developer.themoviedb.org/reference/tv-series-videos
  */
-const videos = ({ id }: TvVideosRequestParams) =>
-  api.fetcher<GetVideosResponse>({
-    endpoint: `tv/${id}/videos`,
-  })
+const videos = ({ id }: TvVideosRequestParams) => {
+  return api.fetcher<GetVideosResponse>(
+    {
+      endpoint: `tv/${id}/videos`,
+    },
+    {
+      next: {
+        tags: [`tv/${id}/videos`],
+      },
+    }
+  )
+}
 
 /**
  * Fetches reviews for a specific TV series.
@@ -145,13 +219,23 @@ const videos = ({ id }: TvVideosRequestParams) =>
  * @returns {Promise<ListResponse<Review>>} A promise that resolves to the reviews of the TV series.
  * @see https://developer.themoviedb.org/reference/tv-series-reviews
  */
-const reviews = ({ id, page }: TvReviewsRequestParams) =>
-  api.fetcher<ListResponse<Review>>({
-    endpoint: `tv/${id}/reviews`,
-    params: {
-      page,
+const reviews = ({ id, page }: TvReviewsRequestParams) => {
+  const params_ = {
+    page,
+  }
+
+  return api.fetcher<ListResponse<Review>>(
+    {
+      endpoint: `tv/${id}/reviews`,
+      params: params_,
     },
-  })
+    {
+      next: {
+        tags: [`tv/${id}/reviews`, JSON.stringify(params_)],
+      },
+    }
+  )
+}
 
 /**
  * Fetches providers for a specific TV Series.
@@ -160,13 +244,28 @@ const reviews = ({ id, page }: TvReviewsRequestParams) =>
  * @returns {Promise<WatchProviders>} A promise that resolves to a list of reviews for the movie.
  * @see https://developer.themoviedb.org/reference/tv-series-watch-providers
  */
-const providers = ({ id, region, season }: TvProvidersRequestParams) =>
-  api.fetcher<WatchProviders>({
-    endpoint: `tv/${id}/${season ? `season/${season}/` : ""}watch/providers`,
-    params: {
-      watch_region: region,
+const providers = ({ id, region, season }: TvProvidersRequestParams) => {
+  const params_ = {
+    watch_region: region,
+  }
+
+  return api.fetcher<WatchProviders>(
+    {
+      endpoint: `tv/${id}/${season ? `season/${season}/` : ""}watch/providers`,
+      params: {
+        watch_region: region,
+      },
     },
-  })
+    {
+      next: {
+        tags: [
+          `tv/${id}/${season ? `season/${season}/` : ""}watch/providers`,
+          JSON.stringify(params_),
+        ],
+      },
+    }
+  )
+}
 
 export const tv = {
   list,

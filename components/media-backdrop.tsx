@@ -47,7 +47,6 @@ export const MediaBackdrop: React.FC<MediaBackdropProps> = ({
       src={src}
       alt={alt}
       priority={priority}
-      unoptimized
       fill
     />
   )

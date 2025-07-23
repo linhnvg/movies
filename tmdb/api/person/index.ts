@@ -12,12 +12,19 @@ import { PersonDetailsRequestParams, PersonListRequestParams } from "./types"
  * @see https://developer.themoviedb.org/reference/person-popular-list
  */
 const list = async ({ list, page }: PersonListRequestParams) =>
-  api.fetcher<ListResponse<Person>>({
-    endpoint: `person/${list}`,
-    params: {
-      page,
+  api.fetcher<ListResponse<Person>>(
+    {
+      endpoint: `person/${list}`,
+      params: {
+        page,
+      },
     },
-  })
+    {
+      next: {
+        tags: [`person/${list}`],
+      },
+    }
+  )
 
 /**
  * Fetches details for a person by ID.
@@ -27,12 +34,19 @@ const list = async ({ list, page }: PersonListRequestParams) =>
  * @see https://developers.themoviedb.org/3/reference/person-details
  */
 const detail = async <T>({ id, append }: PersonDetailsRequestParams) =>
-  api.fetcher<PersonDetails & T>({
-    endpoint: `person/${id}`,
-    params: {
-      append_to_response: append,
+  api.fetcher<PersonDetails & T>(
+    {
+      endpoint: `person/${id}`,
+      params: {
+        append_to_response: append,
+      },
     },
-  })
+    {
+      next: {
+        tags: [`person/${id}`],
+      },
+    }
+  )
 
 /**
  * Fetches combined credits for a person by ID.
@@ -41,9 +55,16 @@ const detail = async <T>({ id, append }: PersonDetailsRequestParams) =>
  * @see https://developers.themoviedb.org/3/reference/person-combined-credits
  */
 const combinedCredits = async ({ id }: PersonDetailsRequestParams) =>
-  api.fetcher<CombinedCreditsResponse>({
-    endpoint: `person/${id}/combined_credits`,
-  })
+  api.fetcher<CombinedCreditsResponse>(
+    {
+      endpoint: `person/${id}/combined_credits`,
+    },
+    {
+      next: {
+        tags: [`person/${id}/combined_credits`],
+      },
+    }
+  )
 
 export const person = {
   detail,

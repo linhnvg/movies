@@ -13,10 +13,17 @@ import { Movie, TvShow } from "@/tmdb/models"
  * @returns A Promise that resolves to a ListResponse containing the discovered movies.
  */
 const movie = (args: DiscoverMovieRequestParams) =>
-  api.fetcher<ListResponse<Movie>>({
-    endpoint: "discover/movie",
-    params: args as Record<string, string>,
-  })
+  api.fetcher<ListResponse<Movie>>(
+    {
+      endpoint: "discover/movie",
+      params: args as Record<string, string>,
+    },
+    {
+      next: {
+        tags: [`discover/movie`, JSON.stringify(args)],
+      },
+    }
+  )
 
 /**
  * Fetches a list of tv shows based on the provided request parameters.
@@ -25,10 +32,17 @@ const movie = (args: DiscoverMovieRequestParams) =>
  * @returns A Promise that resolves to a ListResponse containing the discovered movies.
  */
 const tv = (args: DiscoverTvRequestParams) =>
-  api.fetcher<ListResponse<TvShow>>({
-    endpoint: "discover/tv",
-    params: args as Record<string, string>,
-  })
+  api.fetcher<ListResponse<TvShow>>(
+    {
+      endpoint: "discover/tv",
+      params: args as Record<string, string>,
+    },
+    {
+      next: {
+        tags: [`discover/tv`, JSON.stringify(args)],
+      },
+    }
+  )
 
 export const discover = {
   movie,

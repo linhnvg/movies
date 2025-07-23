@@ -16,12 +16,19 @@ import { TrendingRequestParams } from "./types"
  * @see https://developers.themoviedb.org/3/trending/trending-movies
  */
 const movie = ({ time, page = "1" }: TrendingRequestParams) =>
-  api.fetcher<ListResponse<MovieWithMediaType>>({
-    endpoint: `trending/movie/${time}`,
-    params: {
-      page,
+  api.fetcher<ListResponse<MovieWithMediaType>>(
+    {
+      endpoint: `trending/movie/${time}`,
+      params: {
+        page,
+      },
     },
-  })
+    {
+      next: {
+        tags: [`trending/movie/${time}`],
+      },
+    }
+  )
 
 /**
  * Fetches a list of trending TV shows based on the specified criteria.
@@ -31,12 +38,19 @@ const movie = ({ time, page = "1" }: TrendingRequestParams) =>
  * @see https://developers.themoviedb.org/3/trending/trending-tv
  */
 const tv = ({ time, page = "1" }: TrendingRequestParams) =>
-  api.fetcher<ListResponse<TvShowWithMediaType>>({
-    endpoint: `trending/tv/${time}`,
-    params: {
-      page,
+  api.fetcher<ListResponse<TvShowWithMediaType>>(
+    {
+      endpoint: `trending/tv/${time}`,
+      params: {
+        page,
+      },
     },
-  })
+    {
+      next: {
+        tags: [`trending/tv/${time}`],
+      },
+    }
+  )
 
 /**
  * Fetches a list of trending people based on the specified criteria.
@@ -46,12 +60,19 @@ const tv = ({ time, page = "1" }: TrendingRequestParams) =>
  * @see https://developers.themoviedb.org/3/trending/trending-people
  */
 const people = ({ time, page = "1" }: TrendingRequestParams) =>
-  api.fetcher<ListResponse<PersonWithMediaType>>({
-    endpoint: `trending/person/${time}`,
-    params: {
-      page,
+  api.fetcher<ListResponse<PersonWithMediaType>>(
+    {
+      endpoint: `trending/person/${time}`,
+      params: {
+        page,
+      },
     },
-  })
+    {
+      next: {
+        tags: [`trending/person/${time}`],
+      },
+    }
+  )
 
 export const trending = {
   movie,

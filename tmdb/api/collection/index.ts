@@ -11,9 +11,16 @@ import { CollectionRequestParams } from "./types"
  * @see https://developers.themoviedb.org/3/collections/collection-details
  */
 const details = ({ id }: CollectionRequestParams) =>
-  api.fetcher<DetailedCollection>({
-    endpoint: `collection/${id}`,
-  })
+  api.fetcher<DetailedCollection>(
+    {
+      endpoint: `collection/${id}`,
+    },
+    {
+      next: {
+        tags: [`collection/${id}`],
+      },
+    }
+  )
 
 export const collection = {
   details,

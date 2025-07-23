@@ -5,6 +5,8 @@ import { MovieHero } from "@/components/movie-hero"
 import { TrendCarousel } from "@/components/trend-carousel"
 import { TvHero } from "@/components/tv-hero"
 
+export const dynamic = "force-static"
+
 export const metadata: Metadata = {
   title: "Home",
 }

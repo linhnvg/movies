@@ -33,13 +33,20 @@ import {
  * @see https://developer.themoviedb.org/reference/movie-upcoming-list
  */
 const list = ({ list, page, region }: MovieListRequestParams) =>
-  api.fetcher<ListResponse<Movie>>({
-    endpoint: `movie/${list}`,
-    params: {
-      page,
-      region,
+  api.fetcher<ListResponse<Movie>>(
+    {
+      endpoint: `movie/${list}`,
+      params: {
+        page,
+        region,
+      },
     },
-  })
+    {
+      next: {
+        tags: [`movie/${list}`],
+      },
+    }
+  )
 
 /**
  * Fetches detailed information about a specific movie.
@@ -49,12 +56,19 @@ const list = ({ list, page, region }: MovieListRequestParams) =>
  * @see https://developer.themoviedb.org/reference/movie-details
  */
 const detail = <T>({ id, append }: MovieDetailsRequestParams) =>
-  api.fetcher<MovieDetails & T>({
-    endpoint: `movie/${id}`,
-    params: {
-      append_to_response: append,
+  api.fetcher<MovieDetails & T>(
+    {
+      endpoint: `movie/${id}`,
+      params: {
+        append_to_response: append,
+      },
     },
-  })
+    {
+      next: {
+        tags: [`movie/${id}`],
+      },
+    }
+  )
 
 /**
  * Fetches the credits (cast and crew) for a specific movie.
@@ -64,9 +78,16 @@ const detail = <T>({ id, append }: MovieDetailsRequestParams) =>
  * @see https://developer.themoviedb.org/reference/movie-credits
  */
 const credits = ({ id }: MovieCreditsRequestParams) =>
-  api.fetcher<Credits>({
-    endpoint: `movie/${id}/credits`,
-  })
+  api.fetcher<Credits>(
+    {
+      endpoint: `movie/${id}/credits`,
+    },
+    {
+      next: {
+        tags: [`movie/${id}/credits`],
+      },
+    }
+  )
 
 /**
  * Fetches recommendations for a specific movie.
@@ -76,12 +97,19 @@ const credits = ({ id }: MovieCreditsRequestParams) =>
  * @see https://developer.themoviedb.org/reference/movie-recommendations
  */
 const recommendations = ({ id, page }: MovieRecommendationsRequestParams) =>
-  api.fetcher<ListResponse<Movie>>({
-    endpoint: `movie/${id}/recommendations`,
-    params: {
-      page,
+  api.fetcher<ListResponse<Movie>>(
+    {
+      endpoint: `movie/${id}/recommendations`,
+      params: {
+        page,
+      },
     },
-  })
+    {
+      next: {
+        tags: [`movie/${id}/recommendations`],
+      },
+    }
+  )
 
 /**
  * Fetches movies similar to a specific movie.
@@ -91,12 +119,19 @@ const recommendations = ({ id, page }: MovieRecommendationsRequestParams) =>
  * @see https://developer.themoviedb.org/reference/movie-similar
  */
 const similar = ({ id, page }: MovieSimilarRequestParams) =>
-  api.fetcher<ListResponse<Movie>>({
-    endpoint: `movie/${id}/similar`,
-    params: {
-      page,
+  api.fetcher<ListResponse<Movie>>(
+    {
+      endpoint: `movie/${id}/similar`,
+      params: {
+        page,
+      },
     },
-  })
+    {
+      next: {
+        tags: [`movie/${id}/similar`],
+      },
+    }
+  )
 
 /**
  * Fetches images for a specific movie.
@@ -106,12 +141,19 @@ const similar = ({ id, page }: MovieSimilarRequestParams) =>
  * @see https://developer.themoviedb.org/reference/movie-images
  */
 const images = ({ id, langs }: MovieImagesRequestParams) =>
-  api.fetcher<GetImagesResponse>({
-    endpoint: `movie/${id}/images`,
-    params: {
-      include_image_language: langs,
+  api.fetcher<GetImagesResponse>(
+    {
+      endpoint: `movie/${id}/images`,
+      params: {
+        include_image_language: langs,
+      },
     },
-  })
+    {
+      next: {
+        tags: [`movie/${id}/images`],
+      },
+    }
+  )
 
 /**
  * Fetches videos for a specific movie.
@@ -121,9 +163,16 @@ const images = ({ id, langs }: MovieImagesRequestParams) =>
  * @see https://developer.themoviedb.org/reference/movie-videos
  */
 const videos = ({ id }: MovieVideosRequestParams) =>
-  api.fetcher<GetVideosResponse>({
-    endpoint: `movie/${id}/videos`,
-  })
+  api.fetcher<GetVideosResponse>(
+    {
+      endpoint: `movie/${id}/videos`,
+    },
+    {
+      next: {
+        tags: [`movie/${id}/videos`],
+      },
+    }
+  )
 
 /**
  * Fetches reviews for a specific movie.
@@ -133,12 +182,19 @@ const videos = ({ id }: MovieVideosRequestParams) =>
  * @see https://developer.themoviedb.org/reference/movie-reviews
  */
 const reviews = ({ id, page }: MovieReviewsRequestParams) =>
-  api.fetcher<ListResponse<Review>>({
-    endpoint: `movie/${id}/reviews`,
-    params: {
-      page,
+  api.fetcher<ListResponse<Review>>(
+    {
+      endpoint: `movie/${id}/reviews`,
+      params: {
+        page,
+      },
     },
-  })
+    {
+      next: {
+        tags: [`movie/${id}/reviews`],
+      },
+    }
+  )
 
 /**
  * Fetches providers for a specific movie.
@@ -148,12 +204,19 @@ const reviews = ({ id, page }: MovieReviewsRequestParams) =>
  * @see https://developer.themoviedb.org/reference/movie-watch-providers
  */
 const providers = ({ id, region }: MovieProvidersRequestParams) =>
-  api.fetcher<WatchProviders>({
-    endpoint: `movie/${id}/watch/providers`,
-    params: {
-      watch_region: region,
+  api.fetcher<WatchProviders>(
+    {
+      endpoint: `movie/${id}/watch/providers`,
+      params: {
+        watch_region: region,
+      },
     },
-  })
+    {
+      next: {
+        tags: [`movie/${id}/watch/providers`],
+      },
+    }
+  )
 
 export const movie = {
   list,

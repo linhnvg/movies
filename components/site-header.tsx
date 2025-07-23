@@ -16,7 +16,7 @@ export const SiteHeader = async () => {
         <SiteNav />
 
         <div className="flex flex-1 justify-end gap-2">
-          <Suspense fallback={<Skeleton className="h-10 w-60" />}>
+          <Suspense fallback={<Skeleton className="h-10 w-[276px]" />}>
             <SearchInput />
           </Suspense>
 

@@ -137,7 +137,7 @@ export default async function Detail({ params }: DetailProps) {
             alt={lastEpisode.name}
           />
           <div className="overlay hover:bg-white/50">
-            <div className="p-4 md:p-10">
+            <div className="bg-linear-to-tr from-background/90 to-background/0 mx-auto w-full max-w-full space-y-4 p-4 pb-8 text-center md:p-14">
               <Badge className="mb-4 gap-1">
                 <span>S{pad(lastEpisode.season_number)}</span>
                 <span>E{pad(lastEpisode.episode_number)}</span>

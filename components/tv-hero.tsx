@@ -42,7 +42,7 @@ export const TvHero: React.FC<TvHeroProps> = ({
       />
 
       <div className="overlay">
-        <div className="mx-auto max-w-3xl space-y-4 p-4 pb-8 text-center md:p-14">
+        <div className="bg-linear-to-tr from-background/90 to-background/0 mx-auto w-full max-w-full space-y-4 p-4 pb-8 text-center md:p-14">
           <Badge className="select-none">{label}</Badge>
 
           <h1 className="line-clamp-2 text-xl font-medium leading-tight tracking-tighter md:text-4xl">
